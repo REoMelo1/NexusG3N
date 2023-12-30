@@ -1,0 +1,26 @@
+const { Client } = require('discord.js');
+const client = new Client();
+
+const prefix = '!';
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('message', (message) => {
+  if (message.author.bot) return; // Ignore messages from bots
+  if (!message.content.startsWith(prefix)) return; // Ignore messages without the prefix
+
+  const args = message.content.slice(prefix.length).split(/ +/);
+  const command = args.shift().toLowerCase();
+
+  if (command === 'ping') {
+    message.channel.send('Pong!');
+  } else if (command === 'hello') {
+    message.channel.send('Hello!');
+  }
+  // Add more commands as needed
+
+});
+
+client.login('YOUR_BOT_TOKEN');
